@@ -7,6 +7,7 @@ import Login from './Login'
 import { setAuthedUser } from '../actions/authedUser'
 import Polls from './Polls'
 import ViewQuestionPage from './ViewQuestionPage'
+import CreateQuestion from './CreateQuestion'
 
 const unasweredQuestion = {
   id: 'am8ehyc8byjqgar0jgpub9',
@@ -64,7 +65,8 @@ export class App extends Component {
             />
           ) : (
             // <Polls/>
-           <ViewQuestionPage match={{params: {id: "8xf0y6ziyjabvozdd253nd"}}}/>
+            // <ViewQuestionPage match={{params: {id: "8xf0y6ziyjabvozdd253nd"}}}/>
+            <CreateQuestion/>
           )}
         </div>
       </Router>

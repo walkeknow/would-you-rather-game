@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 const percentage = (number, total) => ((number / total) * 100).toFixed(2)
