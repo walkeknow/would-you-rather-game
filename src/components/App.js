@@ -18,6 +18,7 @@ import Leaderboard from './Leaderboard'
 export class App extends Component {
   state = {
     authedUser: null,
+    pathnameFromLogin: ''
   }
   componentDidMount() {
     this.props.dispatch(handleInitialData())
@@ -27,7 +28,7 @@ export class App extends Component {
       authedUser: uid,
     }))
   }
-  handleSubmit = (e) => {
+  handleSubmit = (e, pathname) => {
     e.preventDefault()
     this.setState((currState) => {
       // if form is submitted without selecting dropdown
@@ -38,6 +39,7 @@ export class App extends Component {
       }
       return {
         authedUser: null,
+        pathnameFromLogin: pathname
       }
     })
   }
@@ -49,30 +51,34 @@ export class App extends Component {
       <Router>
         <div className='container'>
           {this.props.autheticated === false ? (
-            <Redirect to='/login' />
-          ) : (
-            <Fragment>
-              <Navbar handleLogout={this.handleLogout} />
-              <Redirect to='/' />
-            </Fragment>
-          )}
-          <Switch>
-            <Route exact path='/' component={Polls}></Route>
-            <Route path='/question/:id' component={ViewQuestionPage}></Route>
-            <Route path='/add' component={CreateQuestion}></Route>
-            <Route path='/leaderboard' component={Leaderboard}></Route>
+            // <Redirect to='/login' />
             <Route
-              path='/login'
-              render={() => {
+              path='/*'
+              render={({location}) => {
                 return (
                   <Login
                     handleSelect={this.handleSelect}
                     handleSubmit={this.handleSubmit}
+                    location={location}
                   />
                 )
               }}
             ></Route>
-          </Switch>
+          ) : (
+            <Fragment>
+              <Navbar handleLogout={this.handleLogout} />
+              <Redirect to={this.state.pathnameFromLogin} />
+              <Switch>
+                <Route exact path='/' component={Polls}></Route>
+                <Route
+                  path='/question/:id'
+                  component={ViewQuestionPage}
+                ></Route>
+                <Route path='/add' component={CreateQuestion}></Route>
+                <Route path='/leaderboard' component={Leaderboard}></Route>
+              </Switch>
+            </Fragment>
+          )}
         </div>
       </Router>
     )
