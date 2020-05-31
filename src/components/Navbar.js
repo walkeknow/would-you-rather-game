@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default function Navbar({ handleLogout }) {
+export function Navbar({ handleLogout, user }) {
   return (
     <nav className='nav'>
       <ul>
@@ -20,6 +21,9 @@ export default function Navbar({ handleLogout }) {
             Create Question
           </NavLink>
         </li>
+        <li>
+          {user && <span className='u-name'> Welcome, {user.name}!</span>}
+        </li>
         <li className='btn-logout' onClick={() => handleLogout()}>
           Logout
         </li>
@@ -27,3 +31,7 @@ export default function Navbar({ handleLogout }) {
     </nav>
   )
 }
+
+export default connect(({ authedUser, users }) => ({
+  user: Object.values(users).filter((user) => user.id === authedUser)[0],
+}))(Navbar)

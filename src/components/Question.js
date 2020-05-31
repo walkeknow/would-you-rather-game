@@ -13,13 +13,15 @@ export class Question extends Component {
           <div className='poll-text'>
             <div className='poll-q-header'>
               <span className='u-name'>{`${name} asks: `}</span>
-              <br/>
+              <br />
               <em>Would you rather</em>
             </div>
             <span className='poll-q-body'>{question.optionOne.text}...?</span>
           </div>
           <div className='btn-container'>
-            <Link to={`/question/${question.id}`}><button className='poll-btn'>View</button></Link>
+            <Link to={`/questions/${question.id}`}>
+              <button className='poll-btn'>View</button>
+            </Link>
           </div>
         </div>
       )

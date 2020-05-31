@@ -14,11 +14,13 @@ import Polls from './Polls'
 import ViewQuestionPage from './ViewQuestionPage'
 import CreateQuestion from './CreateQuestion'
 import Leaderboard from './Leaderboard'
+import NoMatch from './NoMatch'
 
 export class App extends Component {
   state = {
     authedUser: null,
-    pathnameFromLogin: ''
+    pathnameFromLogin: '',
+    fromLogout: false,
   }
   componentDidMount() {
     this.props.dispatch(handleInitialData())
@@ -39,31 +41,36 @@ export class App extends Component {
       }
       return {
         authedUser: null,
-        pathnameFromLogin: pathname
+        pathnameFromLogin: pathname,
       }
     })
   }
   handleLogout = () => {
     this.props.dispatch(setAuthedUser(null))
+    this.setState(() => ({
+      fromLogout: true,
+    }))
   }
   render() {
     return (
       <Router>
         <div className='container'>
           {this.props.autheticated === false ? (
-            // <Redirect to='/login' />
-            <Route
-              path='/*'
-              render={({location}) => {
-                return (
-                  <Login
-                    handleSelect={this.handleSelect}
-                    handleSubmit={this.handleSubmit}
-                    location={location}
-                  />
-                )
-              }}
-            ></Route>
+            <Fragment>
+              {this.state.fromLogout === true && <Redirect to='/' />}
+              <Route
+                path='/*'
+                render={({ location }) => {
+                  return (
+                    <Login
+                      handleSelect={this.handleSelect}
+                      handleSubmit={this.handleSubmit}
+                      location={location}
+                    />
+                  )
+                }}
+              ></Route>
+            </Fragment>
           ) : (
             <Fragment>
               <Navbar handleLogout={this.handleLogout} />
@@ -71,11 +78,14 @@ export class App extends Component {
               <Switch>
                 <Route exact path='/' component={Polls}></Route>
                 <Route
-                  path='/question/:id'
+                  path='/questions/:question_id'
                   component={ViewQuestionPage}
                 ></Route>
                 <Route path='/add' component={CreateQuestion}></Route>
                 <Route path='/leaderboard' component={Leaderboard}></Route>
+                <Route
+                  render={({ location }) => <NoMatch location={location} />}
+                ></Route>
               </Switch>
             </Fragment>
           )}

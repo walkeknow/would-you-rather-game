@@ -24,19 +24,26 @@ function SubmitAnswer({ question, dispatch, authedUser }) {
         onSubmit={(e) => handleSubmit(e, dispatch, authedUser, question.id)}
       >
         <span className='a-header'>Would You Rather?</span>
-        <div>
-          <input
-            type='radio'
-            id='option-one'
-            name='answer'
-            value='optionOne'
-            defaultChecked
-          />
-          <label htmlFor='option-one'>{optionOne}</label>
-        </div>
-        <div>
-          <input type='radio' id='option-two' name='answer' value='optionTwo' />
-          <label htmlFor='option-one'>{optionTwo}</label>
+        <div className='radio-options'>
+          <div>
+            <input
+              type='radio'
+              id='option-one'
+              name='answer'
+              value='optionOne'
+              defaultChecked
+            />
+            <label htmlFor='option-one'>{optionOne}</label>
+          </div>
+          <div>
+            <input
+              type='radio'
+              id='option-two'
+              name='answer'
+              value='optionTwo'
+            />
+            <label htmlFor='option-one'>{optionTwo}</label>
+          </div>
         </div>
         <button type='submit' className='btn'>
           Submit
