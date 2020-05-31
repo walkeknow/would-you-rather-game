@@ -11,8 +11,14 @@ function UserStats({ user, rank }) {
           <div className='rank-name'>{name}</div>
         </div>
         <div className='stats'>
-          <div><strong>Asked: </strong>{questions.length}</div>
-          <div><strong>Answered: </strong>{Object.keys(answers).length}</div>
+          <div>
+            <strong>Asked: </strong>
+            {questions.length}
+          </div>
+          <div>
+            <strong>Answered: </strong>
+            {Object.keys(answers).length}
+          </div>
         </div>
         <div className='stats-total'>
           <div>Total</div>

@@ -9,7 +9,7 @@ function Leaderboard({ users }) {
         <ul>
           {users.map((user, index) => (
             <li key={user.id}>
-              <UserStats user={user} rank={index + 1}/>
+              <UserStats user={user} rank={index + 1} />
             </li>
           ))}
         </ul>

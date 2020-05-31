@@ -1,34 +1,19 @@
-import React, { Component} from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Navbar from '../components/Navbar'
-import { BrowserRouter as Router} from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 import Login from './Login'
 import { setAuthedUser } from '../actions/authedUser'
 import Polls from './Polls'
 import ViewQuestionPage from './ViewQuestionPage'
 import CreateQuestion from './CreateQuestion'
 import Leaderboard from './Leaderboard'
-
-const unasweredQuestion = {
-  id: 'am8ehyc8byjqgar0jgpub9',
-  author: 'sarahedo',
-  timestamp: 1488579767190,
-  optionOne: {
-    votes: [],
-    text: 'be telekinetic',
-  },
-  optionTwo: {
-    votes: ['sarahedo'],
-    text: 'be telepathic'
-  }
-}
-
-const answeredQuestion = {
-  id: 'xj352vofupe1dqz9emx13r'
-}
-
-console.log(unasweredQuestion)
 
 export class App extends Component {
   state = {
@@ -48,28 +33,46 @@ export class App extends Component {
       // if form is submitted without selecting dropdown
       if (currState.authedUser === null) {
         this.props.dispatch(setAuthedUser('sarahedo'))
-      } else this.props.dispatch(setAuthedUser(currState.authedUser))
+      } else {
+        this.props.dispatch(setAuthedUser(currState.authedUser))
+      }
       return {
         authedUser: null,
       }
     })
   }
+  handleLogout = () => {
+    this.props.dispatch(setAuthedUser(null))
+  }
   render() {
     return (
       <Router>
-        <Navbar />
         <div className='container'>
           {this.props.autheticated === false ? (
-            <Login
-              handleSelect={this.handleSelect}
-              handleSubmit={this.handleSubmit}
-            />
+            <Redirect to='/login' />
           ) : (
-            // <Polls/>
-            // <ViewQuestionPage match={{params: {id: "8xf0y6ziyjabvozdd253nd"}}}/>
-            // <CreateQuestion/>
-            <Leaderboard/>
+            <Fragment>
+              <Navbar handleLogout={this.handleLogout} />
+              <Redirect to='/' />
+            </Fragment>
           )}
+          <Switch>
+            <Route exact path='/' component={Polls}></Route>
+            <Route path='/question/:id' component={ViewQuestionPage}></Route>
+            <Route path='/add' component={CreateQuestion}></Route>
+            <Route path='/leaderboard' component={Leaderboard}></Route>
+            <Route
+              path='/login'
+              render={() => {
+                return (
+                  <Login
+                    handleSelect={this.handleSelect}
+                    handleSubmit={this.handleSubmit}
+                  />
+                )
+              }}
+            ></Route>
+          </Switch>
         </div>
       </Router>
     )

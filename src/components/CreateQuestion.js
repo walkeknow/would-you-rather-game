@@ -19,19 +19,23 @@ class CreateQuestion extends Component {
   }
   handleSubmit = (e, dispatch, authedUser) => {
     e.preventDefault()
-    this.setState((currState)=> {
+    if (this.state.optionOne === '' || this.state.optionTwo === '') {
+      alert('Please fill both fields!')
+    } else {
       const questionObj = {
-        optionOneText: currState.optionOne,
-        optionTwoText: currState.optionTwo,
+        optionOneText: this.state.optionOne,
+        optionTwoText: this.state.optionTwo,
         author: authedUser,
       }
       dispatch(handleSubmitQuestion(questionObj))
-      // todo redirect to home
-      return {
-        optionOne: '',
-        optionTwo: ''
-      }
-    })
+      this.props.history.push('/')
+      this.setState(() => {
+        return {
+          optionOne: '',
+          optionTwo: '',
+        }
+      })
+    }
   }
   render() {
     const { dispatch, authedUser } = this.props

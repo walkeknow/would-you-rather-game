@@ -1,24 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-function Login({ handleSelect, handleSubmit }) {
-  return (
-    <form className='login-container' onSubmit={(e) => handleSubmit(e)}>
-      <label className='label' htmlFor='users'>
-        <h3>Select a User</h3>
-      </label>
-      <select
-        onChange={(e) => handleSelect(e.target.value)}
-        className='dropdown'
-        name='users'
-        id='users'
-      >
-        <option value='sarahedo'>Sarah Edo</option>
-        <option value='tylermcginnis'>Tyler McGinnis</option>
-        <option value='dan_abramov'>Dan Abramov</option>
-      </select>
-      <button className='btn'>Submit</button>
-    </form>
-  )
+class Login extends Component {
+  render() {
+    const { handleSelect, handleSubmit } = this.props
+    return (
+      <form className='login-container' onSubmit={(e) => handleSubmit(e)}>
+        <label className='label' htmlFor='users'>
+          <h3>Login with a User</h3>
+        </label>
+        <select
+          onChange={(e) => handleSelect(e.target.value)}
+          className='dropdown'
+          name='users'
+          id='users'
+        >
+          <option value='sarahedo'>Sarah Edo</option>
+          <option value='tylermcginnis'>Tyler McGinnis</option>
+          <option value='dan_abramov'>Dan Abramov</option>
+        </select>
+        <button className='btn'>Submit</button>
+      </form>
+    )
+  }
 }
 
-export default Login
+export default connect()(Login)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default function Navbar () {
+export default function Navbar({ handleLogout }) {
   return (
     <nav className='nav'>
       <ul>
@@ -20,10 +20,8 @@ export default function Navbar () {
             Create Question
           </NavLink>
         </li>
-        <li>
-          <NavLink to='/login' activeClassName='active'>
-            Login
-          </NavLink>
+        <li className='btn-logout' onClick={() => handleLogout()}>
+          Logout
         </li>
       </ul>
     </nav>
