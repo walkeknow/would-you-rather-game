@@ -1,9 +1,12 @@
 import { GET_USERS } from '../actions/users'
+import { SAVE_QUESTION_ANSWER } from '../actions/questions'
 
 export const users = (state = {}, action) => {
   switch (action.type) {
     case GET_USERS:
       return action.users
+    case SAVE_QUESTION_ANSWER:
+      return action.info.users
     default:
       return state
   }

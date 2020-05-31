@@ -6,6 +6,27 @@ import { BrowserRouter as Router} from 'react-router-dom'
 import Login from './Login'
 import { setAuthedUser } from '../actions/authedUser'
 import Polls from './Polls'
+import ViewQuestionPage from './ViewQuestionPage'
+
+const unasweredQuestion = {
+  id: 'am8ehyc8byjqgar0jgpub9',
+  author: 'sarahedo',
+  timestamp: 1488579767190,
+  optionOne: {
+    votes: [],
+    text: 'be telekinetic',
+  },
+  optionTwo: {
+    votes: ['sarahedo'],
+    text: 'be telepathic'
+  }
+}
+
+const answeredQuestion = {
+  id: 'xj352vofupe1dqz9emx13r'
+}
+
+console.log(unasweredQuestion)
 
 export class App extends Component {
   state = {
@@ -42,7 +63,8 @@ export class App extends Component {
               handleSubmit={this.handleSubmit}
             />
           ) : (
-            <Polls/>
+            // <Polls/>
+           <ViewQuestionPage match={{params: {id: "8xf0y6ziyjabvozdd253nd"}}}/>
           )}
         </div>
       </Router>
