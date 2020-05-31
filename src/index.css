@@ -232,10 +232,6 @@ li {
 }
 
 .label {
-
-}
-
-.label {
   font-size: 14px;
 }
 
@@ -251,4 +247,69 @@ li {
 .btn-create {
   height: 70px;
   border-radius: 5px;
+}
+
+.l-container {
+  background-color: aliceblue;
+  padding: 30px;
+}
+
+.l-sub-container {
+  background-color: #e8eaf6;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-stats {
+  display: flex;
+  margin: 10px;
+  background-color: aliceblue;
+  padding: 10px;
+  justify-content: space-around;
+}
+
+.avatar-stat {
+  height: 50px;
+  border-radius: 25px;
+}
+
+.rank-container {
+  margin-left: 20px;
+  min-width: 100px;
+}
+
+.rank {
+  text-align: center;
+  background-color: #3949ab;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.rank-name {
+  text-align: center;
+  background-color: #e4e4e4;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.stats {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.stats-total {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #3949ab;
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+  font-size: 11px;
+  color: #ffffff;
+  font-weight: bold;
+  font-style: italic;
 }
