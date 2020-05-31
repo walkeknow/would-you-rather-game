@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component} from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Navbar from '../components/Navbar'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router} from 'react-router-dom'
 import Login from './Login'
 import { setAuthedUser } from '../actions/authedUser'
+import Polls from './Polls'
 
 export class App extends Component {
   state = {
@@ -21,25 +22,36 @@ export class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.setState((currState) => {
-      this.props.dispatch(setAuthedUser(currState.authedUser))
+      // if form is submitted without selecting dropdown
+      if (currState.authedUser === null) {
+        this.props.dispatch(setAuthedUser('sarahedo'))
+      } else this.props.dispatch(setAuthedUser(currState.authedUser))
       return {
-        authedUser: null
+        authedUser: null,
       }
     })
   }
   render() {
     return (
       <Router>
+        <Navbar />
         <div className='container'>
-          <Navbar />
-          <Login
-            handleSelect={this.handleSelect}
-            handleSubmit={this.handleSubmit}
-          />
+          {this.props.autheticated === false ? (
+            <Login
+              handleSelect={this.handleSelect}
+              handleSubmit={this.handleSubmit}
+            />
+          ) : (
+            <Polls/>
+          )}
         </div>
       </Router>
     )
   }
 }
 
-export default connect()(App)
+const mapStateToProps = ({ authedUser }) => ({
+  autheticated: authedUser !== null,
+})
+
+export default connect(mapStateToProps)(App)

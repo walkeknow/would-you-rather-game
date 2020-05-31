@@ -11,17 +11,17 @@ export default function Navbar () {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/new' activeClassName='active'>
+          <NavLink to='/leaderboard' activeClassName='active'>
             Leaderboard
           </NavLink>
         </li>
         <li>
-          <NavLink to='/new' activeClassName='active'>
+          <NavLink to='/add' activeClassName='active'>
             Create Question
           </NavLink>
         </li>
         <li>
-          <NavLink to='/new' activeClassName='active'>
+          <NavLink to='/login' activeClassName='active'>
             Login
           </NavLink>
         </li>
