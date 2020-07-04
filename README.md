@@ -1,6 +1,6 @@
-# Would You Rather? Project
+# Would You Rather?
 
-A platform for playing the "Would You Rather?" game
+An app built with React.js and Redux for playing the _Would You Rather?_ game with polls on user-generated topics 
 
 ## Features
 
